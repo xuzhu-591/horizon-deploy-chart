@@ -1,0 +1,225 @@
+horizon:
+  # image repositories are forked from https://raw.githubusercontent.com/horizoncd/helm-charts/main/horizon-cn-values.yaml
+  # supply the values.yaml of Horizon chart for user in China
+  gitlab:
+    image: registry.cn-hangzhou.aliyuncs.com/horizoncd/gitlab.gitlab-ce
+    imageTag: 13.11.7-ce.0
+    persistence:
+      size: 20Gi
+
+  tektoncd:
+    tektonDashboard:
+      image: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.dashboard.cmd.dashboard:v0.13.0
+    tektonPipelineController:
+      image: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.pipeline.cmd.controller:v0.28.0
+      kubeconfigWriterImage: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.pipeline.cmd.kubeconfigwriter:v0.28.0
+      gitImage: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.pipeline.cmd.git-init:v0.28.0
+      entrypointImage: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.pipeline.cmd.entrypoint:v0.28.0
+      nopImage: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.pipeline.cmd.nop:v0.28.0
+      imagedigestExporterImage: registry.cn-hangzhou.aliyuncs.com/horizoncd.tektoncd.pipeline.cmd.imagedigestexporter:v0.28.0
+      pullRequestInitImage: registry.cn-hangzhou.aliyuncs.com/horizoncd.tektoncd.pipeline.cmd.pullrequest-init:v0.28.0
+      gsutilImage: registry.cn-hangzhou.aliyuncs.com/horizoncd/gcr.io.google.com.cloudsdktool.cloud-sdk:302.0.0-slim
+      shellImage: registry.cn-hangzhou.aliyuncs.com/horizoncd/gcr.io.distroless.base:debug
+    tektonPipelineWebhook:
+      image: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.pipeline.cmd.webhook:v0.28.0
+    tektonTriggersController:
+      image: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.triggers.cmd.controller:v0.17.0
+      elImage: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.triggers.cmd.eventlistenersink:v0.17.0
+    tektonTriggersWebhook:
+      image: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.triggers.cmd.webhook:v0.17.0
+    tektonTriggerInterceptor:
+      image: registry.cn-hangzhou.aliyuncs.com/horizoncd/tektoncd.triggers.cmd.interceptors:v0.17.0
+
+  redis:
+    image:
+      registry: registry.cn-hangzhou.aliyuncs.com
+      repository: horizoncd/bitnami.redis
+      tag: 7.0.10-debian-11-r2
+    sentinel:
+      image:
+        registry: registry.cn-hangzhou.aliyuncs.com
+        repository: horizoncd/bitnami.redis-sentinel
+        tag: 7.0.10-debian-11-r1
+    metrics:
+      image:
+        registry: registry.cn-hangzhou.aliyuncs.com
+        repository: horizoncd/bitnami.redis-exporter
+        tag: 1.48.0-debian-11-r6
+    volumePermissions:
+      image:
+        registry: registry.cn-hangzhou.aliyuncs.com
+        repository: horizoncd/bitnami.bitnami-shell
+        tag: 11-debian-11-r99
+    sysctl:
+      image:
+        registry: registry.cn-hangzhou.aliyuncs.com
+        repository: horizoncd/bitnami.bitnami-shell
+        tag: 11-debian-11-r99
+
+  chartmuseum:
+    image:
+      repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/ghcr.io.helm.chartmuseum
+      tag: v0.13.1
+
+  grafana:
+    image:
+      repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/grafana.grafana
+      tag: 8.2.5
+
+  argo-cd:
+    applicationController:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/quay.io.argoproj.argocd
+        tag: v2.4.11
+    redis:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/quay.io.argoproj.argocd
+        tag: v2.4.11
+    repoServer:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/quay.io.argoproj.argocd
+        tag: v2.4.11
+    server:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/quay.io.argoproj.argocd
+        tag: v2.4.11
+
+  harbor:
+    nginx:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.nginx-photon
+        tag: v2.2.3
+    portal:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.harbor-portal
+        tag: v2.2.3
+    core:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.harbor-core
+        tag: v2.2.3
+    jobservice:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.harbor-jobservice
+        tag: v2.2.3
+    registry:
+      registry:
+        image:
+          repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.registry-photon
+          tag: v2.2.3
+      controller:
+        image:
+          repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.harbor-registryctl
+          tag: v2.2.3
+    notary:
+      server:
+        image:
+          repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.notary-server-photon
+          tag: v2.2.3
+      signer:
+        image:
+          repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.notary-signer-photon
+          tag: v2.2.3
+    trivy:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.trivy-adapter-photon
+        tag: v2.2.3
+    exporter:
+      image:
+        repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.harbor-exporter
+        tag: v2.2.3
+    database:
+      internal:
+        image:
+          repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/goharbor.harbor-db
+          tag: v2.2.3
+    persistence:
+      persistentVolumeClaim:
+        databse:
+          size: 20Gi
+        jobservice:
+          size: 20Gi
+        database:
+          size: 20Gi
+
+  mysql:
+    image:
+      registry: "registry.cn-hangzhou.aliyuncs.com"
+      repository: horizoncd/bitnami.mysql
+      tag: 8.0.31-debian-11-r0
+    primary:
+      persistence:
+        size: 20Gi
+
+  minio:
+    image:
+      registry: "registry.cn-hangzhou.aliyuncs.com"
+      repository: horizoncd/bitnami.minio
+      tag: 2022.10.29-debian-11-r0
+    persistence:
+      size: 20Gi
+
+  # for horizon
+  core:
+    image:
+      repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/horizon-core
+  job:
+    image:
+      repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/horizon-job
+  swagger:
+    image:
+      repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/horizon-swagger
+  web:
+    image:
+      repository: registry.cn-hangzhou.aliyuncs.com/horizoncd/horizon-web
+
+  tektonci-resources:
+    horizon:
+      buildTask:
+        image:
+          gitStep: registry.cn-hangzhou.aliyuncs.com/horizoncd/base-bash:v1.0.0
+          compileStep: registry.cn-hangzhou.aliyuncs.com/horizoncd/base-bash:v1.0.0
+          imageStep: registry.cn-hangzhou.aliyuncs.com/horizoncd/podman-bash:v1.0.0
+      checkTask:
+        image:
+          checkStep: registry.cn-hangzhou.aliyuncs.com/horizoncd/base-bash:v1.1.0
+      deployTask:
+        image:
+          deployStep: registry.cn-hangzhou.aliyuncs.com/horizoncd/base-bash:v1.0.0
+      pipelineRun:
+        dockerfileBaseImage: registry.cn-hangzhou.aliyuncs.com/horizoncd/base-bash:v1.0.0
+        baseImage:
+          java:
+            jdk1.8: registry.cn-hangzhou.aliyuncs.com/horizoncd/maven:3.8.6-openjdk-8
+            jdk11: registry.cn-hangzhou.aliyuncs.com/horizoncd/maven:3.8.6-amazoncorretto-11
+            jdk17: registry.cn-hangzhou.aliyuncs.com/horizoncd/maven:3.8.6-amazoncorretto-17
+          node:
+            node16: registry.cn-hangzhou.aliyuncs.com/horizoncd/node:16-alpine3.17
+            node20: registry.cn-hangzhou.aliyuncs.com/horizoncd/node:20.5-alpine
+          golang:
+            golang1.18: registry.cn-hangzhou.aliyuncs.com/horizoncd/golang:1.18-alpine
+            golang1.19: registry.cn-hangzhou.aliyuncs.com/horizoncd/golang:1.19-alpine
+            golang1.20: registry.cn-hangzhou.aliyuncs.com/horizoncd/golang:1.20-alpine
+            golang1.21: registry.cn-hangzhou.aliyuncs.com/horizoncd/golang:1.21-alpine
+    auth:
+      dockerConfigJson:
+        {
+          "auths":
+            {
+              "horizon-registry.horizoncd.svc.cluster.local":
+                {
+                  "username": "admin",
+                  "password": "Harbor12345",
+                  "auth": "YWRtaW46SGFyYm9yMTIzNDU=",
+                },
+              "registry.cn-hangzhou.aliyuncs.com":
+                { "username": "xxx", "password": "xxx", "auth": "xxx" },
+            },
+        }
+    gitRepos:
+      http:
+        - url: codeup.aliyun.com
+          token: xxx
+
+  tags:
+    minimal: false
+    full: true
